@@ -1,9 +1,8 @@
 const urlModel = require('../models/url-model');
 const findLongUrlController = async (req, res) => {
-    console.log(req.params);
     let shortid = req.params.shortId;
     const entry = await urlModel.findOneAndUpdate({
-        shortid
+        shortId: shortid
     }, {
         $push: {
             visitHistory: {
@@ -12,6 +11,6 @@ const findLongUrlController = async (req, res) => {
         }
     });
     res.redirect(entry.redirectURL);
-};
+}
 
 module.exports = { findLongUrlController };
